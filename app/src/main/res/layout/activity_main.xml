@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:gravity="center">
+
+    <com.hxzk.bj.toucheventdemo.RelativeLayoutCustom
+        android:id="@+id/rl_group"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        android:background="@color/colorAccent">
+
+        <com.hxzk.bj.toucheventdemo.TextViewCustom
+            android:id="@+id/tv_hellow"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="Hello World!"
+            android:background="@color/colorPrimaryDark"
+
+            />
+
+    </com.hxzk.bj.toucheventdemo.RelativeLayoutCustom>
+    ]
+
+
+
+</LinearLayout>

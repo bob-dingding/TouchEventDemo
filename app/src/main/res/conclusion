@@ -1,0 +1,44 @@
+
+
+android的触摸事件主要有一下几个重要的方法：
+
+dispatchTouchEvent： 主要是用来进行事件分发和传递的，返回true的时候一定是自己去消费，返回false有可能是自己消费也有可能是传递给自己的OnTouchEvent方法
+                      super就传递给其他的view。该方法也是触摸事件第一个执行的方法。
+
+
+onInterceptTouchEvent： 主要是viewGroup特有的，用来做触摸事件拦截的，默认返回false：如果false或者super表示不拦截，
+                        事件继续向下传递。事件所经过的每一层的viewGroup都会去调用该方法来询问是否拦截。
+                        如果返回true，则代表拦截该事件，停止传递给子view，会走自己的onTouchEvent事件
+                        事件被拦截后，子view会接收到一个cancel事件，来恢复之前的状态，结束当前事件流
+
+
+requestDisallowInterceptTouchEvent：该方法也是事件拦截用的，也是viewGroup专有的方法，  和onInterceptTouchEvent类似，
+                                不过一般是在子view中来调用的。
+
+
+onTouch :当一个触摸事件被分发到一个view的时候，就会调用该方法.在onTouchEvent之前
+
+
+onTouchEvent:真正用来处理触摸事件的最后调用的方法，在这里你可以自己写你的触摸事件算法。
+              onTouchEvent是否拦截取决于down事件
+
+onClick：熟悉，一个点击事件，是在onTouchEvent的UP事件里面执行的,它的优先级是最低的，如果
+onTouchEvent或OnTouchListener的onTouch方法如果返回true，则不响应onClick方法.
+
+
+
+
+
+执行顺序：onTouch—>onTouchEvent—>onClick，注意：onClick直接消费掉了事件，不会再向上回溯事件了。
+
+
+只有我们注册OnTouchListener时重写的
+onTouch()方法中
+
+返回false —> 执行onTouchEvent方法 —> 导致onClick()回调方法执行　
+
+返回true —> onTouchEvent方法不执行 —> 导致onClick()回调方法不会执行
+
+
+dispatchTouchEvent和onTouchEvent对事件是否消费是在DOWN事件中来决定的，
+如果DOWN没有返回true，则后续的move、up都不会再来找上门了
